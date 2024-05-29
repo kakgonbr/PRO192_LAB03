@@ -18,7 +18,7 @@ public abstract class Employee {
     protected Employee(){
         int temp = 0;
         while (!setID(temp++));
-        setName("Employee #" + ++employeeCount);
+        setName("Employee No " + ++employeeCount);
         setDateOfBirth(0);
         setNoWorkDays(7);
     }
@@ -81,7 +81,7 @@ public abstract class Employee {
         long currentTime = System.currentTimeMillis();
         int yearDiff = (int) ((currentTime - dateOfBirth) / (1000 * 60 * 60 * 24 * 365.25)); // to sec, to min, to hour, to day, to year
 
-        if (122 < yearDiff || yearDiff < 0) return false;
+        if (122 < yearDiff || yearDiff < 15) return false;
         age = yearDiff;
         return true;
     }

@@ -25,8 +25,7 @@ public class MenuEmployee extends Menu{
                     System.out.println("\u001B[31mThere is no employee in the database.\u001B[0m");
                     return;
                 }
-                for (final Employee employee : employees)
-                    employee.printInfo();
+                (new MenuEmployeeList(employees, tempEmployeesIndex)).start();
                 break;
 
             case 3:

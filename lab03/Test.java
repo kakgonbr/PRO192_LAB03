@@ -10,6 +10,7 @@ public class Test {
         TempEmployee employee = new TempEmployee(1, "yes sir", "23/02/2005", 3);
         employee.printInfo();
         employees.add(employee);
+        tempEmployeesIndex.add(0);
 
         OfficialEmployee employee2 = new OfficialEmployee(1, "no sir", "4/6/2004", 30, 3);
         employee2.printInfo();
