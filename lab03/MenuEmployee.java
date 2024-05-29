@@ -63,7 +63,7 @@ public class MenuEmployee extends Menu{
                         System.out.println("\u001B[31mCannot find employee with the name \"" + name + "\"\u001B[0m");
                         break;
                     case 1:
-                        names.add(employees.get(0).getFullName());
+                        names.add(employees.get(matches.get(0)).getFullName());
                         names.add("Cancel");
                         (new MenuRemoveEmployee(employees, tempEmployeesIndex, matches, names)).start();
                         break;
