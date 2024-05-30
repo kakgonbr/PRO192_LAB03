@@ -17,14 +17,14 @@ public abstract class Menu {
 
     // ------------------------------------------------------------- Methods -------------------------------------------------------------------
     private int getChoice(){
-        System.out.println("\n" + "-".repeat(20) + title + "-".repeat(20));
+        System.out.println("\n\u001B[33m" + "-".repeat(20) + title + "-".repeat(20));
 
         int i = 0;
         String inp;
         for (final String item : choices)
             System.out.println(++i + ". " + item);
 
-        if ((inp = misc.Utils.getLine("Enter choice: ", misc.Utils.validations.vInt)).isBlank())
+        if ((inp = misc.Utils.getLine("Enter choice: \u001B[0m", misc.Utils.validations.vInt)).isBlank())
             return -1;
         else return Integer.parseInt(inp);
     }

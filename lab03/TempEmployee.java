@@ -1,8 +1,8 @@
 package lab03;
 
-public class TempEmployee extends Employee{
+public final class TempEmployee extends Employee{
     // ------------------------------------------------------------- Fields -------------------------------------------------------------------
-    private double seasonalPayRate = .5d;
+    private static double seasonalPayRate = .5d;
     
     // ------------------------------------------------------------- Constructors -------------------------------------------------------------------
     public TempEmployee(){

@@ -25,18 +25,18 @@ public abstract class Employee {
 
     protected Employee(int _ID, String _first, String _last, String _dob, int _workdays){
         while (!setID(_ID++));
-        if (!setFirstName(_first)) throw new misc.InvalidParameter("Invalid first name.");
+        if (!setFirstName(_first)) throw new IllegalArgumentException("Invalid first name.");
         setLastName(_last);
-        if (!setDateOfBirth(_dob)) throw new misc.InvalidParameter("Invalid date of birth.");
-        if (!setNoWorkDays(_workdays)) throw new misc.InvalidParameter("Invalid number of work days.");
+        if (!setDateOfBirth(_dob)) throw new IllegalArgumentException("Invalid date of birth.");
+        if (!setNoWorkDays(_workdays)) throw new IllegalArgumentException("Invalid number of work days.");
         employeeCount++;
     }
 
     protected Employee(int _ID, String _name, String _dob, int _workdays){
         while (!setID(_ID++));
-        if (!setName(_name)) throw new misc.InvalidParameter("Invalid name.");
-        if (!setDateOfBirth(_dob)) throw new misc.InvalidParameter("Invalid day of birth.");
-        if (!setNoWorkDays(_workdays)) throw new misc.InvalidParameter("Invalid number of work days.");
+        if (!setName(_name)) throw new IllegalArgumentException("Invalid name.");
+        if (!setDateOfBirth(_dob)) throw new IllegalArgumentException("Invalid day of birth.");
+        if (!setNoWorkDays(_workdays)) throw new IllegalArgumentException("Invalid number of work days.");
         employeeCount++;
     }
     
@@ -71,6 +71,10 @@ public abstract class Employee {
 
     public int getNoWorkDays() {
         return noWorkDays;
+    }
+    
+    public String getType(){
+        return type;
     }
 
     protected abstract long getSalary();
@@ -176,7 +180,7 @@ public abstract class Employee {
     public void updateInfo(){
         String inp;
         while ((inp = misc.Utils.getLine("Enter ID: ", misc.Utils.validations.vInt)).isBlank() || !setID(Integer.parseInt(inp)))
-        System.out.println("ID is taken or is invalid.");
+            System.out.println("ID is taken or is invalid.");
         while ((inp = misc.Utils.getLine("Enter name: ")).isBlank() || !setName(inp))
             System.out.println("Name cannot be blank or be comprised entirely of special symbols");
         // while ((inp = misc.Utils.getLine("Enter first name: ")).isBlank() || setFirstName(inp))

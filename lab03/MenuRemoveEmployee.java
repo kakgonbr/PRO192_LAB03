@@ -26,13 +26,13 @@ public class MenuRemoveEmployee extends Menu{
             for (int i = matchIndexes.size() - 1; i >= 0; i--){
                 Employee.removeID(employees.get(matchIndexes.get(i)).getID());
                 employees.remove(matchIndexes.get(i).intValue());
-                tempEmployeesIndex.remove(Integer.valueOf(matchIndexes.get(i)));
+                tempEmployeesIndex.remove(matchIndexes.get(i));
             }
 
         } else if (choice < choices.size()) {
             Employee.removeID(employees.get(matchIndexes.get(choice - 1)).getID());
             employees.remove(matchIndexes.get(choice - 1).intValue());
-            tempEmployeesIndex.remove(Integer.valueOf(matchIndexes.get(choice - 1)));
+            tempEmployeesIndex.remove(matchIndexes.get(choice - 1));
         }
 
     }

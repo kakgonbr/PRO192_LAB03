@@ -1,6 +1,6 @@
 package lab03;
 
-public class OfficialEmployee extends Employee{
+public final class OfficialEmployee extends Employee{
     // ------------------------------------------------------------- Fields -------------------------------------------------------------------
     private int hourOverTime;
 
@@ -14,13 +14,13 @@ public class OfficialEmployee extends Employee{
     public OfficialEmployee(int _ID, String _first, String _last, String _dob, int _workdays, int overTime){
         super(_ID, _first, _last, _dob, _workdays);
         super.type = "Official";
-        if (!setOverTime(overTime)) throw new misc.InvalidParameter("Invalid over time.");
+        if (!setOverTime(overTime)) throw new IllegalArgumentException("Invalid over time.");
     }
 
     public OfficialEmployee(int _ID, String _name, String _dob, int _workdays, int overTime){
         super(_ID, _name, _dob, _workdays);
         super.type = "Official";
-        if (!setOverTime(overTime)) throw new misc.InvalidParameter("Invalid over time.");
+        if (!setOverTime(overTime)) throw new IllegalArgumentException("Invalid over time.");
     }
 
     // ------------------------------------------------------------- Setters -------------------------------------------------------------------

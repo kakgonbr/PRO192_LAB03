@@ -6,10 +6,14 @@ public class MenuEmployee extends Menu{
     private ArrayList<Employee> employees; // DO NOT MODIFY THIS REFERENCE
     private ArrayList<Integer> tempEmployeesIndex;
 
-    public MenuEmployee(ArrayList<String> _choices,
-                         boolean once, ArrayList<Employee> _employees,
+    public MenuEmployee(ArrayList<Employee> _employees,
                          ArrayList<Integer> indexes){
-        super(_choices, once, "Menu");
+        super(new ArrayList<>(java.util.Arrays.asList("Add an employee", 
+                                                            "Get employee list",
+                                                            "Sort employee by salary",
+                                                            "Find and remove an employee entry by name",
+                                                            "Get average salary of employees",
+                                                            "Exit")), false, "Menu");
         employees = _employees;
         tempEmployeesIndex = indexes;
     }
@@ -17,19 +21,23 @@ public class MenuEmployee extends Menu{
     @Override
     protected void execute(int choice) {
         switch (choice) {
-            case 1:
-                (new MenuAddEmployee(employees, tempEmployeesIndex)).start();
-                break;
-            case 2:
-                if (employees.size() == 0){
+            case 1 -> // Add an employee
+                (new MenuAddEmployee(employees, tempEmployeesIndex)).start(); // Menu to add
+            case 2 -> {
+                // Get a list of employees by type
+                if (employees.isEmpty()){
                     System.out.println("\u001B[31mThere is no employee in the database.\u001B[0m");
                     return;
                 }
-                (new MenuEmployeeList(employees, tempEmployeesIndex)).start();
-                break;
+                if (employees.size() == tempEmployeesIndex.size() || tempEmployeesIndex.isEmpty())
+                    for (final Employee employee : employees)
+                        employee.printInfo();
+                else (new MenuEmployeeList(employees, tempEmployeesIndex)).start(); // choose which type
+            }
 
-            case 3:
-                if (employees.size() == 0){
+            case 3 -> {
+                // get a sorted list of employees by salary
+                if (employees.isEmpty()){
                     System.out.println("\u001B[31mThere is no employee in the database.\u001B[0m");
                     return;
                 }
@@ -39,10 +47,11 @@ public class MenuEmployee extends Menu{
 
                 for (final Employee employee : sortedEmployees)
                     employee.printInfo();
-                break;
+            }
 
-            case 4:
-                if (employees.size() == 0){
+            case 4 -> {
+                // Find and remove employee
+                if (employees.isEmpty()){
                     System.out.println("\u001B[31mThere is no employee in the database.\u001B[0m");
                     return;
                 }
@@ -58,15 +67,13 @@ public class MenuEmployee extends Menu{
                 }
                 ArrayList<String> names = new ArrayList<>();
                 switch (matches.size()) {
-                    case 0:
-                        System.out.println("\u001B[31mCannot find employee with the name \"" + name + "\"\u001B[0m");
-                        break;
-                    case 1:
+                    case 0 -> System.out.println("\u001B[31mCannot find employee with the name \"" + name + "\"\u001B[0m");
+                    case 1 -> {
                         names.add(employees.get(matches.get(0)).getFullName());
                         names.add("Cancel");
                         (new MenuRemoveEmployee(employees, tempEmployeesIndex, matches, names)).start();
-                        break;
-                    default:
+                }
+                    default -> {
                         for (final int match : matches)
                             names.add(employees.get(match).getFullName());
 
@@ -74,10 +81,12 @@ public class MenuEmployee extends Menu{
                         names.add("Cancel");
                         (new MenuRemoveEmployee(employees, tempEmployeesIndex, matches, names)).start();
                 }
-                break;
+                }
+            }
 
-            case 5:
-                if (employees.size() == 0){
+            case 5 -> {
+                // Get average salary
+                if (employees.isEmpty()){ // Avoid dividing by 0
                     System.out.println("\u001B[31mThere is no employee in the database.\u001B[0m");
                     return;
                 }
@@ -87,15 +96,13 @@ public class MenuEmployee extends Menu{
                     averageSalary += employee.getSalary();
                 
                 System.out.println("Average salary: " + (averageSalary / employees.size()));
-
-                break;
+            }
                 
-            case 6:
+            case 6 -> {
                 System.out.println("Exiting.");
                 stopped = true;
-                break;
-            default:
-                System.err.println("\u001B[31mInvalid input, enter 6 to exit.\u001B[0m");
+            }
+            default -> System.err.println("\u001B[31mInvalid input, enter 6 to exit.\u001B[0m");
         }
     }
     
